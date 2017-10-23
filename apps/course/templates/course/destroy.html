@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <h2>Are you sure you want to delete the following course?</h2>
+            <p>Name: {{course.name}}</p>
+            <p>Description: {{course.description}}</p><br>
+            <form action="/courses/no" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="No">
+            </form>
+            <form action="/courses/remove/{{course.id}}" method="POST">
+                {% csrf_token %}
+                <input style="background-color: red; color: white;" type="submit" value="Yes! I want to delete this">
+            </form>
+        </div>
+    </body>
+</html>

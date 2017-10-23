@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Add a student to all bootcamp courses</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <h2>Add a new course</h2>
+            <form action="/courses/add" method="post">
+                {% csrf_token %}
+                <p>Name: <input style="width:150px;" type="text" name="input_name"></p>
+                <p>Description: </p>
+                <input style="width: 150px;" type="textarea" name="input_desc"><br>
+                <input type="submit" value="Add">
+            </form>
+            <h2>Courses</h2>
+            <table class="table-striped">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Description</th>
+                        <th>Date Added</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                        <tr>
+                            <td>{{course.name}}</td>
+                            <td>{{course.description}}</td>
+                            <td>{{course.created_at}}</td>
+                            <td>
+                                <a href="/courses/destroy/{{course.id}}">Remove</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </body>
+</html>
